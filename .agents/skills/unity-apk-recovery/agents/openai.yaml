@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unity APK 逆向恢复"
+  short_description: "从完整 APK 提取资源并对照原版恢复 Unity 场景、教程与运行流程"
+  default_prompt: "使用 $unity-apk-recovery 继续 APK 恢复，先读取接续状态，再通过 Unity MCP 验证原版画面和行为。"
