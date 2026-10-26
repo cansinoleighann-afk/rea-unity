@@ -1,5 +1,16 @@
 # Repository Guidelines
 
+## GPT 模型分工（用户约定）
+
+本仓库工作流使用 GPT 系列模型时，按以下顺序分工：
+
+1. 计划阶段使用 `gpt-6.1-sol`：分析需求和已有证据，制定步骤、依赖、风险及验收标准，输出可交接的执行计划。
+2. 计划完成后的所有执行使用 `gpt-6-luna`：依照计划调查、调用工具、编写或修改代码、测试、修复和整理交付结果。
+3. 若需要实质性调整计划，交回 `gpt-6.1-sol` 更新计划，再由 `gpt-6-luna` 继续执行。已有明确计划时复用，避免重复规划。
+4. 该约定仅适用于 GPT 系列模型，不改变其他模型的选择。遵守用户对本次任务的最新明确指示。
+5. 通过宿主实际支持的模型切换或任务分派功能落实分工；文件中的约定不会自动切换当前聊天或 MCP 服务的模型。若指定模型不可用或宿主不能切换，明确说明限制，不声称已经切换，不擅自换用其他模型。
+6. 模型分工不扩大任务权限；用户要求“先分析”时，执行阶段也仅进行分析，不修改游戏工程。
+
 ## Product and Authority
 
 REA is a local-only reverse-engineering tool with shared CLI/MCP workflows. Distinguish observations, derivations, inferences, and unknowns; preserve Evidence provenance and session semantics through both adapters. Provider support and setup live in [README.md](README.md#choosing-a-deep-analysis-provider) and its linked guides.
