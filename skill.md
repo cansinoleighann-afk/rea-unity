@@ -19,7 +19,7 @@
 4. 导入验证副本，从一个代表性场景开始。用 Unity API 或 MCP 修复序列化资源并保留 GUID 和 fileID。检查编译、Console、场景引用、Play Mode、真实输入及状态结果。按需求补测构建或设备。
 5. 对齐构建版本、场景、分辨率和状态。先用结构化结果定位差异，再补截图。接续历史项目时先核对现有路径、版本和端口。 [APK 流程](.agents/skills/unity-apk-recovery/references/recovery-workflow.md) · [桌面流程](.agents/skills/unity-pc-game-recovery/references/desktop-workflow.md) · [Unity MCP 验证](.agents/skills/unity-apk-recovery/references/mcp-27841.md)
 
-Windows 的 Ghidra 安装目录与临时项目目录使用纯英文或数字路径，避开中文路径和以点开头的目录。Ghidra 12.2 配 JDK 25。仓库的 REA 6.8.0 仍走旧的 Ghidra 版本约束，连接 12.2 时使用单独安装的 REA 6.10.1。
+Windows 的 Ghidra 安装目录与临时项目目录使用纯英文或数字路径，避开中文路径和以点开头的目录。Ghidra 12.2 配 JDK 25。REA 6.10.1 支持连接 Ghidra 12.2。
 
 ## 逆向工程处理
 
