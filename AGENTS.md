@@ -1,5 +1,7 @@
 # Repository Guidelines
 
+For Unity reverse-engineering workflows and skill updates, start with [skill.md](skill.md).
+
 ## GPT 模型分工（用户约定）
 
 本仓库工作流使用 GPT 系列模型时，按以下顺序分工：
