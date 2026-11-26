@@ -1,6 +1,6 @@
 import { z } from "zod";
-import type { ExecutionOptions } from "../AnalysisProvider.js";
-import type { EvmInterfacePort } from "./EvmInterfacePort.js";
+import type { ExecutionOptions } from "../../ports/AnalysisProvider.js";
+import type { EvmInterfacePort } from "../../ports/evm/EvmInterfacePort.js";
 import type { AnalysisError } from "../../domain/analysisErrorBase.js";
 import { AnalysisOutputError } from "../../domain/analysisErrorCore.js";
 import type { Evidence } from "../../domain/evidence.js";
@@ -10,10 +10,8 @@ import {
   evmInterfaceSchema,
 } from "../../domain/evm/evmInterface.js";
 import { err, type Result } from "../../domain/result.js";
-import {
-  completeProviderEvidence,
-  parseProviderOperationInput,
-} from "../ProviderOperationExecution.js";
+import { completeProviderEvidence } from "../ProviderOperationExecution.js";
+import { parseAnalysisInput } from "../AnalysisInput.js";
 
 const OPERATION = "inspect_evm_interface";
 const diagnosticsSchema = z.object({
@@ -33,7 +31,7 @@ export class EvmInterfaceService {
     rawInput: unknown,
     options?: ExecutionOptions,
   ): Promise<Result<Evidence, AnalysisError>> {
-    const input = parseProviderOperationInput(
+    const input = parseAnalysisInput(
       OPERATION,
       rawInput,
       inspectEvmInterfaceInputSchema,

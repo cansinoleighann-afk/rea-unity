@@ -1,5 +1,5 @@
-import type { ExecutionOptions } from "../AnalysisProvider.js";
-import type { RecordedCrashPort } from "./RecordedCrashPort.js";
+import type { ExecutionOptions } from "../../ports/AnalysisProvider.js";
+import type { RecordedCrashPort } from "../../ports/binaryDiagnostics/RecordedCrashPort.js";
 import type { AnalysisError } from "../../domain/analysisErrorBase.js";
 import { AnalysisOutputError } from "../../domain/analysisErrorCore.js";
 import { createEvidence, type Evidence } from "../../domain/evidence.js";
@@ -9,10 +9,8 @@ import {
   recordedCrashSchema,
 } from "../../domain/native/recordedCrash.js";
 import { err, type Result } from "../../domain/result.js";
-import {
-  completeProviderEvidence,
-  parseProviderOperationInput,
-} from "../ProviderOperationExecution.js";
+import { completeProviderEvidence } from "../ProviderOperationExecution.js";
+import { parseAnalysisInput } from "../AnalysisInput.js";
 
 const OPERATION = "inspect_recorded_crash";
 
@@ -51,7 +49,7 @@ export class RecordedCrashService {
       input: Parameters<RecordedCrashPort["inspect"]>[0],
     ) => ReturnType<RecordedCrashPort["inspect"]>,
   ): Promise<Result<Evidence, AnalysisError>> {
-    const input = parseProviderOperationInput(
+    const input = parseAnalysisInput(
       OPERATION,
       rawInput,
       inspectRecordedCrashInputSchema,
@@ -97,6 +95,9 @@ export class RecordedCrashService {
           parameters: {
             path: input.value.path,
             include_debugger_context: input.value.include_debugger_context,
+            ...(input.value.producer_limits === undefined
+              ? {}
+              : { producer_limits: input.value.producer_limits }),
             ...(input.value.pwntools_timeout_ms === undefined
               ? {}
               : { pwntools_timeout_ms: input.value.pwntools_timeout_ms }),
