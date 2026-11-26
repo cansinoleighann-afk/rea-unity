@@ -1,15 +1,15 @@
 # rea-unity 逆向技能
 
-这是本项目的逆向技能入口和维护位置。按输入和目标选流程，只读当前阶段需要的详文。原始资料来自 F:\AI技能库\逆向技能。
+这是本项目的逆向技能入口和维护位置。按输入和目标选流程，只读当前阶段需要的详文。原始资料来自 F:\AI技能库\逆向技能。 新环境先看 [Unity 工具安装指南](Unity工具安装.md)。
 
 ## 选择流程
 
-| 输入或目标 | 入口 |
-| --- | --- |
-| APK、XAPK、APKS 或多个 Android 分包 | [Unity APK 恢复](.agents/skills/unity-apk-recovery/SKILL.md)。先用 [recovery_manifest.py](.agents/skills/unity-apk-recovery/scripts/recovery_manifest.py) 检查输入。分包可能分别携带 Unity 资源和原生库。 |
-| Windows 或其他桌面平台的 Unity 构建产物 | [Unity 桌面游戏恢复](.agents/skills/unity-pc-game-recovery/SKILL.md)。盘点完整游戏目录，确认 Unity 版本、Mono 或 IL2CPP、平台和架构。 |
-| 已有可编辑工程，且用户明确要处理逆向项目 | 使用下方“逆向工程处理”。原技能位于 `F:\AI技能库\逆向技能\处理项目\unity-reverse-project-workflow\SKILL.md`。 |
-| 查加载入口、资源键、方法地址或静态调用关系 | [REA 分析](.agents/skills/reverse-engineer-anything/SKILL.md)。选范围最小的只读查询，保留路径、哈希、版本和覆盖范围。 |
+| 输入或目标                                 | 入口                                                                                                                                                                                                      |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| APK、XAPK、APKS 或多个 Android 分包        | [Unity APK 恢复](.agents/skills/unity-apk-recovery/SKILL.md)。先用 [recovery_manifest.py](.agents/skills/unity-apk-recovery/scripts/recovery_manifest.py) 检查输入。分包可能分别携带 Unity 资源和原生库。 |
+| Windows 或其他桌面平台的 Unity 构建产物    | [Unity 桌面游戏恢复](.agents/skills/unity-pc-game-recovery/SKILL.md)。盘点完整游戏目录，确认 Unity 版本、Mono 或 IL2CPP、平台和架构。                                                                     |
+| 已有可编辑工程，且用户明确要处理逆向项目   | 使用下方“逆向工程处理”。原技能位于 `F:\AI技能库\逆向技能\处理项目\unity-reverse-project-workflow\SKILL.md`。                                                                                              |
+| 查加载入口、资源键、方法地址或静态调用关系 | [REA 分析](.agents/skills/reverse-engineer-anything/SKILL.md)。选范围最小的只读查询，保留路径、哈希、版本和覆盖范围。                                                                                     |
 
 ## APK 和电脑端恢复
 
@@ -25,13 +25,13 @@ Windows 的 Ghidra 安装目录与临时项目目录使用纯英文或数字路�
 
 开工前核对项目根目录、Unity 与 SDK 版本、目标平台、当前场景、输出和基线。完整流程按 T1–T12 推进，每项记录改动和验收证据。单项任务使用所需步骤及其前置依赖。原规范与任务清单位于 `F:\AI技能库\逆向技能\处理项目\unity-reverse-project-workflow\references`。
 
-| 阶段 | 工作与验收 |
-| --- | --- |
-| T1–T2 | 接入 Unity MCP，按项目要求安装两项框架包。核对项目、端口、场景、已加载包版本和编译状态。 |
-| T3–T5 | 盘点可达文本、汉化、替换字体并生成中文子集。保留格式占位符、富文本和动态参数，验证缺字、排版、回退字体后再清理旧引用。 |
-| T6–T8 | 修复 UI 贴图导入类型，设置 WebGL 贴图覆盖，优化音频。验证图集、遮罩和交互。资源优化排除 `Assets/WX-WASM-SDK-V2/**` 与 `Assets/WebGLTemplates/**`。源音频大于 102,400 字节才考虑外部转码。 |
-| T9–T11 | 配置 WebGL 和微信小游戏，做构建前总检，然后生成并验收首包。核对 SDK 和生成配置、本地加载模式、非空 `data-package` 或已配置的本地子包。清缓存启动，条件允许时断网复测。 |
-| T12 | 分析 `webgl.data` 或解包后的 `data.unity3d`。记录大小、哈希、表示形式和资源分布。Brotli 与未压缩体积分别统计，按同一口径比较。WASM 和 JavaScript 单列为运行时诊断。 |
+| 阶段   | 工作与验收                                                                                                                                                                                |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| T1–T2  | 接入 Unity MCP，按项目要求安装两项框架包。核对项目、端口、场景、已加载包版本和编译状态。                                                                                                  |
+| T3–T5  | 盘点可达文本、汉化、替换字体并生成中文子集。保留格式占位符、富文本和动态参数，验证缺字、排版、回退字体后再清理旧引用。                                                                    |
+| T6–T8  | 修复 UI 贴图导入类型，设置 WebGL 贴图覆盖，优化音频。验证图集、遮罩和交互。资源优化排除 `Assets/WX-WASM-SDK-V2/**` 与 `Assets/WebGLTemplates/**`。源音频大于 102,400 字节才考虑外部转码。 |
+| T9–T11 | 配置 WebGL 和微信小游戏，做构建前总检，然后生成并验收首包。核对 SDK 和生成配置、本地加载模式、非空 `data-package` 或已配置的本地子包。清缓存启动，条件允许时断网复测。                    |
+| T12    | 分析 `webgl.data` 或解包后的 `data.unity3d`。记录大小、哈希、表示形式和资源分布。Brotli 与未压缩体积分别统计，按同一口径比较。WASM 和 JavaScript 单列为运行时诊断。                       |
 
 按实际 SDK 和构建日志确认包体门槛。CDN 回退按过渡构建记录。每轮优化保留前置设置和回滚依据，等待重导入后检查 Console，重新构建再复核收益。
 
