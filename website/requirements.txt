@@ -5,5 +5,5 @@ polib==1.2.0
 # Read authored Markdown destinations for the website link checks.
 markdown-it-py==4.3.0
 # Build Markdown reading pages and emit their YAML frontmatter.
-markdownify==1.2.3
+markdownify==1.2.4
 PyYAML==6.0.3
